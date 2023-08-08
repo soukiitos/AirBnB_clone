@@ -109,10 +109,13 @@ class HBNBCommand(cmd.Cmd):
         if attribute_name in ["id", "created_at", "updated_at"]:
             print("** can't update this attribute **")
             return
-        if len(args) <= 3:
+        if len(args) < 4:
             print("** value missing **")
             return
         attribute_value = args[3]
+        if not hasattr(instance, attribute_name):
+            print("** attribute doesn't exist **")
+            return
         attribute_type = type(getattr(instance, attribute_name))
         if attribute_type == str:
             setattr(instance, attribute_name, str(attribute_value))
@@ -121,8 +124,7 @@ class HBNBCommand(cmd.Cmd):
         elif attribute_type == float:
             setattr(instance, attribute_name, float(attribute_value))
         else:
-            print("** can't update this attribute **")
-            return
+            setattr(instance, attribute_name, attribute_value)
         instance.save()
 
     '''Quit command to exit the program'''

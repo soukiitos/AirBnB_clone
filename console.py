@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 4:
             print("** value missing **")
             return
-        attribute_value = args[3]
+        attribute_value = args[3].strip('"')
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 

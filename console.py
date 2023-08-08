@@ -13,10 +13,11 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    
+
     prompt = "(hbnb)"
     __classes = {"BaseModel": BaseModel, "User": User}
 
+    '''Create a new instance of BaseModel, Save, Print id'''
     def do_create(self, arg):
         if arg:
             if arg in self.__classes:
@@ -28,6 +29,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
+    '''Print the string representation of an instance'''
     def do_show(self, arg):
         args = arg.split()
         if len(args) == 0:
@@ -45,6 +47,7 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
+    '''Delete an instance'''
     def do_destroy(self, arg):
         args = arg.split()
         if len(args) == 0:
@@ -63,6 +66,7 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
+    '''Print all string representation of all instances'''
     def do_all(self, arg):
         args = arg.split()
         if len(args) == 0:
@@ -78,21 +82,62 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    '''Ubdate an instance'''
+    def do_update(self, arg):
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        class_name = args[0]
+        if class_name not in self.__classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        instance_id = args[1]
+        instance_key = f"{class_name}.{instance_id}"
+        obj_dict = models.storage.all()
+        if instance_key not in obj_dict:
+            print("** no instance found **")
+            return
+        instance = obj_dict[instance_key]
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        attribute_name = args[2]
+        if attribute_name in ["id", "created_at", "updated_at"]:
+            print("** can't update this attribute **")
+            return
+        if len(args) <= 3:
+            print("** value missing **")
+            return
+        attribute_value = args[3]
+        attribute_type = type(getattr(instance, attribute_name))
+        if attribute_type == str:
+            setattr(instance, attribute_name, str(attribute_value))
+        elif attribute_type == int:
+            setattr(instance, attribute_name, int(attribute_value))
+        elif attribute_type == float:
+            setattr(instance, attribute_name, float(attribute_value))
+        else:
+            print("** can't update this attribute **")
+            return
+        instance.save()
 
-
+    '''Quit command to exit the program'''
     def do_quit(self, arg):
-        """Quit command to exit the program
-        """
         return True
 
+    '''Exit the program using EOF'''
     def do_EOF(self, arg):
-        """Exit the programm usinf EOF"""
         print()
         return True
 
+    '''Do nothing on an empty line'''
     def emptyline(self):
-        """Do nothing on empty line"""
         pass
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

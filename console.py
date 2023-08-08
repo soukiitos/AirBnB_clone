@@ -15,14 +15,14 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     
     prompt = "(hbnb)"
-    __classes = {"BaseModel": BaseModel}
+    __classes = {"BaseModel": BaseModel, "User": User}
 
     def do_create(self, arg):
         if arg:
             if arg in self.__classes:
-                base_model = self.__classes[arg]()
-                base_model.save()
-                print(f"{base_model.id}")
+                new_instance = self.__classes[arg]()
+                new_instance.save()
+                print(f"{new_instance.id}")
             else:
                 print("** class doesn't exist **")
         else:
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
-    def destroy(self, arg):
+    def do_destroy(self, arg):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -53,11 +53,30 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) != 2:
             print("** instance id missing **")
+        else:
+            all_objects = models.storage.all()
+            for key in all_objects.keys():
+                class_name, obj_id = key.split('.')
+                if args[0] == class_name and args[1] == obj_id:
+                    del all_objects[key]
+                    models.storage.save()
+                    return
+            print("** no instance found **")
 
-
-
-
-
+    def do_all(self, arg):
+        args = arg.split()
+        if len(args) == 0:
+            all_objects = models.storage.all()
+            for key in all_objects.keys():
+                print(all_objects[key])
+        elif len(args) == 1 and args[0] in self.__classes:
+            all_objects = models.storage.all()
+            for key in all_objects.keys():
+                class_name, obj_id = key.split('.')
+                if class_name == args[0]:
+                    print(all_objects[key])
+        else:
+            print("** class doesn't exist **")
 
 
 

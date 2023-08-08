@@ -25,15 +25,17 @@ class BaseModel:
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
-    '''The update of the datetime'''
     def save(self):
+        """The update of the datetime"""
         self.updated_at = datetime.now()
         models.storage.save()
 
-    '''Return the dictionary of the BaseModel'''
     def to_dict(self):
-        dic = self.__dict__
+        """Return the dictionary of the BaseModel"""
+        dic = {}
+        for key, value in self.__dict__.items():
+            if (isinstance(value, datetime)):
+                value = value.isoformat()
+            dic[key] = value
         dic['__class__'] = self.__class__.__name__
-        dic['created_at'] = dic['created_at'].isoformat()
-        dic['updated_at'] = dic['updated_at'].isoformat()
         return dic

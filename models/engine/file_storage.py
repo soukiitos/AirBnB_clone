@@ -15,7 +15,7 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    classes = {"BaseModel": BaseModel}
+    classes = {"BaseModel": BaseModel, "User": User}
 
     '''Define all the dictionary objects'''
     def all(self):

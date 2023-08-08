@@ -113,18 +113,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         attribute_value = args[3]
-        if not hasattr(instance, attribute_name):
-            print("** attribute doesn't exist **")
-            return
-        attribute_type = type(getattr(instance, attribute_name))
-        if attribute_type == str:
-            setattr(instance, attribute_name, str(attribute_value))
-        elif attribute_type == int:
-            setattr(instance, attribute_name, int(attribute_value))
-        elif attribute_type == float:
-            setattr(instance, attribute_name, float(attribute_value))
-        else:
-            setattr(instance, attribute_name, attribute_value)
+        setattr(instance, attribute_name, attribute_value)
         instance.save()
 
     '''Quit command to exit the program'''

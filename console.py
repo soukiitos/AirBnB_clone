@@ -120,6 +120,24 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
+    def default(self, arg):
+        count = 0
+        args = arg.split('.')
+        all_objects = models.storage.all()
+        if args[0] in self.__classes and args[1] == "all()":
+            for key in all_objects:
+                 class_name, obj = key.split('.')
+                 if class_name == args[0]:
+                     print(all_objects[key])
+        if args[0] in self.__classes and args[1] == "count()":
+            for key in all_objects:
+                class_name, obj = key.split('.')
+                if class_name == args[0]:
+                    count += 1
+            print(count)
+
+
+
     '''Quit command to exit the program'''
     def do_quit(self, arg):
         return True

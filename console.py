@@ -15,9 +15,13 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb)"
-    __classes = {"BaseModel": BaseModel
-            , "User": User, "Place": Place, "State": State,
-            "City": City, "Amenity": Amenity,
+    __classes = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Place": Place,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
             "Review": Review
             }
 
@@ -120,23 +124,59 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
+    '''Define the count'''
+    def do_count(self, arg):
+        args = arg.split()
+        if len(args) != 1:
+            print("** Class name missing **")
+        else:
+            class_name = args[0]
+            if class_name in self.__classes:
+                all_objects = models.storage.all()
+                count = sum(1 for key in all_objects if key.split('.')[0] == class_name)
+                print(count)
+            else:
+                print("** class doesn't exist **")
+
+    '''Define default'''
     def default(self, arg):
-        count = 0
-        args = arg.split('.')
-        all_objects = models.storage.all()
-        if args[0] in self.__classes and args[1] == "all()":
-            for key in all_objects:
-                 class_name, obj = key.split('.')
-                 if class_name == args[0]:
-                     print(all_objects[key])
-        if args[0] in self.__classes and args[1] == "count()":
-            for key in all_objects:
-                class_name, obj = key.split('.')
-                if class_name == args[0]:
-                    count += 1
-            print(count)
-
-
+        cmdPattern = r"^([A-Za-z]+)\.([a-z]+)\(([^)]*)\)"
+        meth = re.match(cmdPattern, arg)
+        if not meth:
+            super().default(arg)
+            return
+        class_name, method, j = meth.groups()
+        if class_name not in self.__classes:
+            print("** Unknown class:", class_name)
+            return
+        if method == 'all':
+            self.do_all(class_name)
+        if method == 'count':
+            self.do_count(class_name)
+        if method == 'show':
+            instance_id = j.strip('"')
+            if not instance_id:
+                print("** Instance id missing **")
+                return
+            delf.do_show("{} {}".format(class_name, instance_id))
+        if method == 'destroy':
+            instance_id = j.strip('"')
+            if not instance_id:
+                print("** Instance id missing **")
+                return
+            self.do_destroy("{} {}".format(class_name, instance_id))
+        if method == 'update':
+            attrib_name, attrib_value = j.split(',', 1)
+            attrib_name = attrib_name.strip('"')
+            attrib_value = attrib_value.strip('"')
+            if not attrib_name or not attrib_value:
+                print("** Attribute name or value missing **")
+                return
+            instance_id = attrib_value.strip('"')
+            if not instance_id:
+                print("** Instance id missing **")
+                return
+            self.do_update("{} {} {} {}".format(class_name, instance_id, attrib_name, attrib_value))
 
     '''Quit command to exit the program'''
     def do_quit(self, arg):

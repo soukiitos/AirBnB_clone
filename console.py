@@ -77,16 +77,21 @@ class HBNBCommand(cmd.Cmd):
     '''Print all string representation of all instances'''
     def do_all(self, arg):
         args = arg.split()
+        lst = []
         if len(args) == 0:
             all_objects = models.storage.all()
             for key in all_objects.keys():
-                print(all_objects[key])
+                lst.append(str(all_objects[key]))
+            if len(lst) >= 1:
+                print(lst)
         elif len(args) == 1 and args[0] in self.__classes:
             all_objects = models.storage.all()
             for key in all_objects.keys():
                 class_name, obj_id = key.split('.')
                 if class_name == args[0]:
-                    print(all_objects[key])
+                    lst.append(str(all_objects[key]))
+            if len(lst) >= 1:
+                print(lst)
         else:
             print("** class doesn't exist **")
 
@@ -158,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
             if not instance_id:
                 print("** Instance id missing **")
                 return
-            delf.do_show("{} {}".format(class_name, instance_id))
+            self.do_show("{} {}".format(class_name, instance_id))
         if method == 'destroy':
             instance_id = j.strip('"')
             if not instance_id:

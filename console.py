@@ -138,7 +138,10 @@ class HBNBCommand(cmd.Cmd):
             class_name = args[0]
             if class_name in self.__classes:
                 all_objects = models.storage.all()
-                count = sum(1 for key in all_objects if key.split('.')[0] == class_name)
+                count = sum(
+                        1 for key in all_objects
+                        if key.split('.')[0] == class_name
+                        )
                 print(count)
             else:
                 print("** class doesn't exist **")
@@ -171,17 +174,19 @@ class HBNBCommand(cmd.Cmd):
                 return
             self.do_destroy("{} {}".format(class_name, instance_id))
         if method == 'update':
-            attrib_name, attrib_value = j.split(',', 1)
-            attrib_name = attrib_name.strip('"')
-            attrib_value = attrib_value.strip('"')
-            if not attrib_name or not attrib_value:
+            split_args = j.split(',')
+            if len(split_args) < 2:
+                print("** No enough args **")
+                return
+            instance_id = split_args[0].strip('"')
+            attrib_name = split_args[1].strip('"')
+            attrib_value = ','.join(split_args[2:]).strip('"')
+            if not instance_id or not attrib_name or not attrib_value:
                 print("** Attribute name or value missing **")
                 return
-            instance_id = attrib_value.strip('"')
-            if not instance_id:
-                print("** Instance id missing **")
-                return
-            self.do_update("{} {} {} {}".format(class_name, instance_id, attrib_name, attrib_value))
+            self.do_update("{} {} {} {}".format(
+                class_name, instance_id, attrib_name, attrib_value)
+                )
 
     '''Quit command to exit the program'''
     def do_quit(self, arg):

@@ -10,6 +10,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -125,7 +126,16 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 4:
             print("** value missing **")
             return
+
         attribute_value = args[3].strip('"')
+        try:
+            attribute_value = int(attribute_value)
+        except ValueError:
+            pass
+            try:
+                attribute_value = float(attribute_value)
+            except ValueError:
+                pass
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
@@ -174,19 +184,14 @@ class HBNBCommand(cmd.Cmd):
                 return
             self.do_destroy("{} {}".format(class_name, instance_id))
         if method == 'update':
-            split_args = j.split(',')
-            if len(split_args) < 2:
-                print("** No enough args **")
-                return
-            instance_id = split_args[0].strip('"')
-            attrib_name = split_args[1].strip('"')
-            attrib_value = ','.join(split_args[2:]).strip('"')
-            if not instance_id or not attrib_name or not attrib_value:
-                print("** Attribute name or value missing **")
-                return
-            self.do_update("{} {} {} {}".format(
-                class_name, instance_id, attrib_name, attrib_value)
-                )
+            instance_id, attrib_dict_str = j.split(',', 1)
+            instance_id = instance_id.strip('"')
+            attrib_dict_str = attrib_dict_str.replace('\'', '"')
+            attrib_dict = json.loads(attrib_dict_str)
+            for key, value in attrib_dict.items():
+                self.do_update("{} {} {} {}".format(
+                    class_name, instance_id, key, value)
+                    )
 
     '''Quit command to exit the program'''
     def do_quit(self, arg):

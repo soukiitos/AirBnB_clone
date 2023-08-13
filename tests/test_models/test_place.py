@@ -27,6 +27,12 @@ class TestPlace_instantiation(unittest.TestCase):
         self.assertIn("city_id", dir(p))
         self.assertNotIn("city_id", p.__dict__)
 
+    def test_amenity_id_public(self):
+        p = Place()
+        self.assertEqual(str, type(Place.amenity_id))
+        self.assertIn("amenity_id", dir(p))
+        self.assertNotIn("amenity_id", p.__dict__)
+
 
 class TestPlace_save(unittest.TestCase):
     '''Testing methods'''

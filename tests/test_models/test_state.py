@@ -12,6 +12,9 @@ class TestState_instantiation(unittest.TestCase):
     def test_instantiation_no_args(self):
         self.assertEqual(State, type(State()))
 
+    def test_id_public(self):
+        self.asserEqual(str, type(State().id))
+
 
 class TestState_save(unittest.TestCase):
     '''Testing methods'''

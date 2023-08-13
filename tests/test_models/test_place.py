@@ -15,6 +15,18 @@ class TestPlace_instantiation(unittest.TestCase):
     def test_id_public(self):
         self.assertEqual(str, type(Place().id))
 
+    def test_user_id_public(self):
+        p = Place()
+        self.assertEqual(str, type(Place.user_id))
+        self.assertIn("user_id", dir(p))
+        self.assertNotIn("user_id", p.__dict__)
+
+    def test_city_id_public(self):
+        p = Place()
+        self.assertEqual(str, type(Place.city_id))
+        self.assertIn("city_id", dir(p))
+        self.assertNotIn("city_id", p.__dict__)
+
 
 class TestPlace_save(unittest.TestCase):
     '''Testing methods'''

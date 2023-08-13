@@ -15,6 +15,18 @@ class TestReview_instantiation(unittest.TestCase):
     def test_id_public(self):
         self.assertEqual(str, type(Review().id))
 
+    def test_user_id_public(self):
+        r = Review()
+        self.assertEqual(str, type(Review.user_id))
+        self.assertIn("user_id", dir(r))
+        self.assertNotIn("user_id", r.__dict__)
+
+    def test_place_id_public(self):
+        r = Review()
+        self.assertEqual(str, type(Review.place_id))
+        self.assertIn("place_id", dir(r))
+        self.assertNotIn("place_id", r.__dict__)
+
 
 class TestReview_save(unittest.TestCase):
     '''Testing methods'''

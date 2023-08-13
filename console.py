@@ -26,8 +26,10 @@ class HBNBCommand(cmd.Cmd):
             "Review": Review
             }
 
-    '''Create a new instance of BaseModel, Save, Print id'''
     def do_create(self, arg):
+        """
+            it Creates a new instance, Saves it then Prints its 'id'.
+        """
         if arg:
             if arg in self.__classes:
                 new_instance = self.__classes[arg]()
@@ -38,8 +40,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    '''Print the string representation of an instance'''
     def do_show(self, arg):
+        """
+            a method that Prints the string representation
+            of a specific instance
+        """
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -56,8 +61,12 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
-    '''Delete an instance'''
+    def help_show(arg):
+        """a help method which shows the Usage of 'show'"""
+        print("Usage: show <class_name> <id> or <class>.show(<id>)")
+
     def do_destroy(self, arg):
+        """a method that deletes an instance"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -75,8 +84,8 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
-    '''Print all string representation of all instances'''
     def do_all(self, arg):
+        """a method that Prints the string representation of all instances"""
         args = arg.split()
         lst = []
         if len(args) == 0:
@@ -96,8 +105,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    '''Ubdate an instance'''
     def do_update(self, arg):
+        """ a method that updates an instance"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -139,8 +148,11 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
-    '''Define the count'''
     def do_count(self, arg):
+        """
+            a method that returns a number of instances
+            of a specific class.
+        """
         args = arg.split()
         if len(args) != 1:
             print("** Class name missing **")
@@ -156,8 +168,8 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
-    '''Define default'''
     def default(self, arg):
+        """a default method which manipulates several commands"""
         cmdPattern = r"^([A-Za-z]+)\.([a-z]+)\(([^)]*)\)"
         meth = re.match(cmdPattern, arg)
         if not meth:
@@ -193,17 +205,17 @@ class HBNBCommand(cmd.Cmd):
                     class_name, instance_id, key, value)
                     )
 
-    '''Quit command to exit the program'''
     def do_quit(self, arg):
+        """Quit command to exit the program"""
         return True
 
-    '''Exit the program using EOF'''
     def do_EOF(self, arg):
+        """Exit the program using EOF"""
         print()
         return True
 
-    '''Do nothing on an empty line'''
     def emptyline(self):
+        """Do nothing on an empty line"""
         pass
 
 

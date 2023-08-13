@@ -1,20 +1,20 @@
 # 0x00.AirBNB_clone - The console
 
-![AirBnB clone](https://thedesignlove.com/wp-content/uploads/2019/07/Features-of-a-Good-Logo-Design-01-1024x750.jpg){width="250px"}
+![AirBnB clone](https://thedesignlove.com/wp-content/uploads/2019/07/Features-of-a-Good-Logo-Design-01-1024x750.jpg){:width="250px"}
 
 ## Description of the project
 
 ### Resources
-[cmd module](https://intranet.alxswe.com/rltoken/8ecCwE6veBmm3Nppw4hz5A)
-[cmd module in depth](https://intranet.alxswe.com/rltoken/uEy4RftSdKypoig9NFTvCg)
-[packages concept page]
-[uuid module](https://intranet.alxswe.com/rltoken/KfL9TqwdI69W6ttG6gTPPQ)
-[datetime](https://intranet.alxswe.com/rltoken/1d8I3jSKgnYAtA1IZfEDpA)
-[unittest module](https://intranet.alxswe.com/rltoken/IlFiMB8UmqBG2CxA0AD3jA)
-[args/kwargs](https://intranet.alxswe.com/rltoken/C_a0EKbtvKdMcwIAuSIZng)
-[Python test cheatsheet](https://intranet.alxswe.com/rltoken/tgNVrKKzlWgS4dfl3mQklw)
-[cmd module wiki page](https://intranet.alxswe.com/rltoken/EvcaH9uTLlauxuw03WnkOQ)
-[python unittest](https://intranet.alxswe.com/rltoken/begh14KQA-3ov29KvD_HvA)
+- [cmd module](https://intranet.alxswe.com/rltoken/8ecCwE6veBmm3Nppw4hz5A)
+- [cmd module in depth](https://intranet.alxswe.com/rltoken/uEy4RftSdKypoig9NFTvCg)
+- [packages concept page]
+- [uuid module](https://intranet.alxswe.com/rltoken/KfL9TqwdI69W6ttG6gTPPQ)
+- [datetime](https://intranet.alxswe.com/rltoken/1d8I3jSKgnYAtA1IZfEDpA)
+- [unittest module](https://intranet.alxswe.com/rltoken/IlFiMB8UmqBG2CxA0AD3jA)
+- [args/kwargs](https://intranet.alxswe.com/rltoken/C_a0EKbtvKdMcwIAuSIZng)
+- [Python test cheatsheet](https://intranet.alxswe.com/rltoken/tgNVrKKzlWgS4dfl3mQklw)
+- [cmd module wiki page](https://intranet.alxswe.com/rltoken/EvcaH9uTLlauxuw03WnkOQ)
+- [python unittest](https://intranet.alxswe.com/rltoken/begh14KQA-3ov29KvD_HvA)
 
 ### Requirements
 
@@ -48,43 +48,42 @@
 ### Execution
 
 ###### The shell we should work like this in interactive mode
-$ ./console.py
+$ ./console.py  
 (hbnb) help
 
 ##### Documented commands (type help <topic>):
-EOF  help  quit
-
-(hbnb) 
-(hbnb) 
-(hbnb) quit
+EOF  help  quit  
+(hbnb)  
+(hbnb)  
+(hbnb) quit  
 $
 
 ###### But also in non-interactive mode
-$ echo "help" | ./console.py
+$ echo "help" | ./console.py  
 (hbnb)
 
 ##### Documented commands (type help <topic>):
-EOF  help  quit
-(hbnb) 
-$
-$ cat test_help
-help
-$
-$ cat test_help | ./console.py
+EOF  help  quit  
+(hbnb)  
+$  
+$ cat test_help  
+help  
+$  
+$ cat test_help | ./console.py  
 (hbnb)
 
 ##### Documented commands (type help <topic>):
-EOF  help  quit
-(hbnb) 
+EOF  help  quit  
+(hbnb)  
 $
 
 ### Installation
-git clone https://github.com/Vanbasten01/AirBnB_clone.git
+- git clone https://github.com/Vanbasten01/AirBnB_clone.git
 
 ### Testing
 
 ###### All tests should also pass in non-interactive mode
-python3 -m unittest discover tests
+- python3 -m unittest discover tests
 
 #### Python unittest
 . unittest module
@@ -93,35 +92,35 @@ python3 -m unittest discover tests
 . Organization: unit tests in:... for mobels/base_model.py
 
 ### Usage
-. Start the console:
-$ ./console.py
+. Start the console:  
+$ ./console.py  
 (hbnb)
-. Use help:
+. Use help:  
 (hbnb) help
 
 ##### Documented commands (type help <topic>):
-EOF  help  quit
-
-(hbnb) 
-(hbnb) help quit
-Quit command to exit the program
-
-(hbnb) 
-(hbnb) 
+EOF  help  quit  
+  
+(hbnb)  
+(hbnb) help quit  
+Quit command to exit the program  
+  
+(hbnb)  
+(hbnb)  
 (hbnb) quit 
 
 ### Commands
-- Create:
+- Create:  
 create BaseModel
-- All:
+- All:  
 all BaseModel
-- Show:
+- Show:  
 show BaseModel
-- Destroy:
+- Destroy:  
 destroy
-- Count:
+- Count:  
 count
-- Update:
+- Update:  
 update BaseModel
 
 ## AUTHORS

@@ -1,6 +1,6 @@
 # 0x00.AirBNB_clone - The console
 
-![AirBnB clone](https://thedesignlove.com/wp-content/uploads/2019/07/Features-of-a-Good-Logo-Design-01-1024x750.jpg){:width="250px"}
+![AirBnB clone](https://thedesignlove.com/wp-content/uploads/2019/07/Features-of-a-Good-Logo-Design-01-1024x750.jpg)
 
 ## Description of the project
 
@@ -86,16 +86,16 @@ $
 - python3 -m unittest discover tests
 
 #### Python unittest
-. unittest module
-. File extension .py
-. Test Files start with test_
-. Organization: unit tests in:... for mobels/base_model.py
+- unittest module
+- File extension .py
+- Test Files start with test_
+- Organization: unit tests in:... for mobels/base_model.py
 
 ### Usage
-. Start the console:  
+- Start the console:  
 $ ./console.py  
-(hbnb)
-. Use help:  
+(hbnb)  
+- Use help:  
 (hbnb) help
 
 ##### Documented commands (type help <topic>):

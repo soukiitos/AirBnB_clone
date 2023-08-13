@@ -15,6 +15,12 @@ class TestCity_instantiation(unittest.TestCase):
     def test_id_public(self):
         self.assertEqual(str, type(City().id))
 
+    def test_city_id_public(self):
+        c = City()
+        self.assertEqual(str, type(City.state_id))
+        self.assertIn("state_id", dir(c))
+        self.assertNotIn("state_id", c.__dict__)
+
 
 class TestCity_save(unittest.TestCase):
     '''Testing methods'''

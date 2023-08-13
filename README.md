@@ -1,4 +1,5 @@
-![AirBnB clone](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230812%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230812T111822Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6577bfbc1224592cb2c68d9a9464980a9aff53558ca9d383cc4ead95c048a73b)
+![AirBnB clone](https://thedesignlove.com/wp-content/uploads/2019/07/Features-of-a-Good-Logo-Design-01-1024x750.jpg)
+
 
 # 0x00.AirBNB_clone - The console
 ### Resources

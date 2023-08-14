@@ -136,6 +136,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
+        attribute_name = args[2].strip('"')
         attribute_value = args[3].strip('"')
         try:
             attribute_value = int(attribute_value)
@@ -196,14 +197,24 @@ class HBNBCommand(cmd.Cmd):
                 return
             self.do_destroy("{} {}".format(class_name, instance_id))
         if method == 'update':
-            instance_id, attrib_dict_str = j.split(',', 1)
-            instance_id = instance_id.strip('"')
-            attrib_dict_str = attrib_dict_str.replace('\'', '"')
-            attrib_dict = json.loads(attrib_dict_str)
-            for key, value in attrib_dict.items():
-                self.do_update("{} {} {} {}".format(
-                    class_name, instance_id, key, value)
-                    )
+            if j.find('{') != -1:
+                instance_id, attrib_dict_str = j.split(',', 1)
+                instance_id = instance_id.strip('"')
+                attrib_dict_str = attrib_dict_str.replace('\'', '"')
+                attrib_dict = json.loads(attrib_dict_str)
+                for key, value in attrib_dict.items():
+                    self.do_update("{} {} {} {}".format(
+                        class_name, instance_id, key, value)
+                        )
+            else:
+                instance_id, attrib_dict_str = j.split(',', 1)
+                instance_id = instance_id.strip('"')
+                args = attrib_dict_str.split(',')
+                att_name = args[0].strip('"')
+                att_value = args[1].strip('"')
+                self.do_update(
+                        f"{class_name} {instance_id} {att_name} {att_value}"
+                        )
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
